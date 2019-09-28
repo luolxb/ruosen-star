@@ -18,7 +18,8 @@ import lombok.Setter;
 public enum ResultInfoEnum {
 
     ERROR_MSG(-1, "未知错误,请联系管理员！"),
-    SUCCESS_MSG(0, "成功！");
+    SUCCESS_MSG(0, "成功！"),
+    USER_IS_NULL(1, "用户不存在");
 
     @Setter
     @Getter

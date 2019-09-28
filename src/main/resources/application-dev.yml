@@ -4,4 +4,4 @@ server:
     context-path: /ruosen  # 培训服务上下文
 logging:
   pattern:
-    level: debug
+    level: info

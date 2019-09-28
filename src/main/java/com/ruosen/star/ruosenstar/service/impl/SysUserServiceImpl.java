@@ -3,6 +3,8 @@ package com.ruosen.star.ruosenstar.service.impl;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.ruosen.star.ruosenstar.dao.SysUserMappper;
+import com.ruosen.star.ruosenstar.exception.CustomException;
+import com.ruosen.star.ruosenstar.module.Enums.ResultInfoEnum;
 import com.ruosen.star.ruosenstar.module.base.PageInfo;
 import com.ruosen.star.ruosenstar.module.po.SysUser;
 import com.ruosen.star.ruosenstar.module.vo.SysUserRq;
@@ -74,6 +76,9 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMappper, SysUser> imp
     @Transactional(readOnly = true)
     public SysUserVo detail(Long id) {
         SysUser sysUser = this.baseMapper.selectById(id);
+        if (null == sysUser) {
+            throw new CustomException(ResultInfoEnum.USER_IS_NULL);
+        }
         SysUserVo sysUserVo = new SysUserVo();
         BeanUtils.copyProperties(sysUser, sysUserVo);
         return sysUserVo;

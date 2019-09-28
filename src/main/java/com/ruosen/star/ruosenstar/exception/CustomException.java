@@ -18,12 +18,14 @@ import lombok.Data;
 @AllArgsConstructor
 public class CustomException extends RuntimeException {
 
+    private static final long serialVersionUID = -5992021692405200159L;
+
     private Integer errorCode;
 
     private String errorMessage;
 
 
     public CustomException(ResultInfoEnum resultInfoEnum) {
-        new CustomException(resultInfoEnum.getCode(), resultInfoEnum.getMsg());
+        this(resultInfoEnum.getCode(), resultInfoEnum.getMsg());
     }
 }
