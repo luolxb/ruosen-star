@@ -1,0 +1,4 @@
+server:
+  port: 9000 # 配置服务端口号
+  servlet:
+    context-path: /ruosen  # 培训服务上下文

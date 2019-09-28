@@ -1,0 +1,7 @@
+server:
+  port: 8088 # 配置服务端口号
+  servlet:
+    context-path: /ruosen  # 培训服务上下文
+spring:
+  profiles:
+    active: dev
