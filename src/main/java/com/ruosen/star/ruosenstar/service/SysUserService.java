@@ -3,6 +3,7 @@ package com.ruosen.star.ruosenstar.service;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.IService;
 import com.ruosen.star.ruosenstar.module.base.PageInfo;
+import com.ruosen.star.ruosenstar.module.base.ResponseData;
 import com.ruosen.star.ruosenstar.module.po.SysUser;
 import com.ruosen.star.ruosenstar.module.vo.SysUserRq;
 import com.ruosen.star.ruosenstar.module.vo.SysUserVo;
@@ -58,4 +59,13 @@ public interface SysUserService extends IService<SysUser> {
      * @return
      */
     Page<SysUserVo> selectUserPage(SysUserRq sysUserRq, PageInfo pageInfo);
+
+    List<SysUserVo> selectUserList(SysUserRq sysUserRq);
+
+    /**
+     * 清空缓存
+     *
+     * @return
+     */
+    ResponseData cacheEvict();
 }

@@ -29,4 +29,6 @@ public interface SysUserMappper extends BaseMapper<SysUser> {
      */
     List<SysUserVo> selectUserPage(SysUserRq sysUserRq, Page page);
 
+    List<SysUserVo> selectUserPage(SysUserRq sysUserRq);
+
 }

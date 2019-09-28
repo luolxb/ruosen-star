@@ -77,6 +77,22 @@ public class SysUserController {
                                                      PageInfo pageInfo) {
         Page<SysUserVo> sysUserVoPage = sysUserService.selectUserPage(sysUserRq, pageInfo);
         return new ResponseData<>().ok(sysUserVoPage);
+    }
 
+    @PostMapping("/getUserList")
+    @ApiOperation(value = "获取用户分页")
+    public ResponseData<List<SysUserVo>> getUserList(@RequestBody(required = false) SysUserRq sysUserRq) {
+        List<SysUserVo> sysUserVoPage = sysUserService.selectUserList(sysUserRq);
+        return new ResponseData<>().ok(sysUserVoPage);
+    }
+
+    /**
+     * 清空缓存
+     *
+     * @return
+     */
+    @GetMapping("/cacheEvict")
+    public ResponseData cacheEvict() {
+        return sysUserService.cacheEvict();
     }
 }

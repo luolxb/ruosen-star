@@ -6,11 +6,15 @@ import com.ruosen.star.ruosenstar.dao.SysUserMappper;
 import com.ruosen.star.ruosenstar.exception.CustomException;
 import com.ruosen.star.ruosenstar.module.Enums.ResultInfoEnum;
 import com.ruosen.star.ruosenstar.module.base.PageInfo;
+import com.ruosen.star.ruosenstar.module.base.ResponseData;
 import com.ruosen.star.ruosenstar.module.po.SysUser;
 import com.ruosen.star.ruosenstar.module.vo.SysUserRq;
 import com.ruosen.star.ruosenstar.module.vo.SysUserVo;
 import com.ruosen.star.ruosenstar.service.SysUserService;
 import org.springframework.beans.BeanUtils;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -36,6 +40,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMappper, SysUser> imp
      * @param sysUserRq
      */
     @Override
+    @CachePut(value = "user", key = "#result.id", unless = "#result == 0")
     @Transactional(rollbackFor = Exception.class)
     public void addUser(SysUserRq sysUserRq) {
         SysUser sysUser = new SysUser();
@@ -46,6 +51,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMappper, SysUser> imp
     }
 
     @Override
+    @CachePut(value = "user", key = "#sysUserRq")
     @Transactional(rollbackFor = Exception.class)
     public void updateUser(SysUserRq sysUserRq) {
         SysUser sysUser = new SysUser();
@@ -61,6 +67,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMappper, SysUser> imp
      * @param ids
      */
     @Override
+    @CacheEvict(value = "user", key = "#ids")
     @Transactional(rollbackFor = Exception.class)
     public void deleteUser(List<Long> ids) {
         this.baseMapper.deleteBatchIds(ids);
@@ -73,6 +80,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMappper, SysUser> imp
      * @return
      */
     @Override
+    @Cacheable(value = "user", key = "#id")
     @Transactional(readOnly = true)
     public SysUserVo detail(Long id) {
         SysUser sysUser = this.baseMapper.selectById(id);
@@ -97,5 +105,24 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMappper, SysUser> imp
         Page<SysUserVo> page = new Page<>(pageInfo.getCurrent(), pageInfo.getSize());
         List<SysUserVo> sysUserVoList = this.baseMapper.selectUserPage(sysUserRq, page);
         return page.setRecords(sysUserVoList);
+    }
+
+    @Override
+    @Cacheable(value = "userList")
+    @Transactional(readOnly = true)
+    public List<SysUserVo> selectUserList(SysUserRq sysUserRq) {
+        List<SysUserVo> sysUserVoList = this.baseMapper.selectUserPage(sysUserRq);
+        return sysUserVoList;
+    }
+
+    /**
+     * 清空缓存
+     *
+     * @return
+     */
+    @Override
+    @CacheEvict(value = {"user", "userList"}, allEntries = true)
+    public ResponseData cacheEvict() {
+        return new ResponseData().ok();
     }
 }
