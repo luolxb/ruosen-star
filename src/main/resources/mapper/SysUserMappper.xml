@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ruosen.star.ruosenstar.dao.SysUserMappper">
+
+    <sql id="usersql">
+         select id,user_name,nick_name,age,sex,password from sys_user
+    </sql>
+    <!-- 获取用户的分页 -->
+    <select id="selectUserPage" resultType="com.ruosen.star.ruosenstar.module.vo.SysUserVo"
+            parameterType="com.ruosen.star.ruosenstar.module.vo.SysUserRq">
+        <include refid="usersql"></include>
+        <where>
+            <if test="userName != null  and userName != ''">
+                and user_name = #{userName}
+            </if>
+            <if test="age != null">
+                and age = #{age}
+            </if>
+        </where>
+    </select>
+
+</mapper>
