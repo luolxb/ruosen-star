@@ -29,7 +29,7 @@ import org.springframework.stereotype.Component;
         jobBeanName = "testJobTest",
         jobGroupName = JobGroupEnum.RUOSEN_STAR,
         triggerGroupName = JobGroupEnum.RUOSEN_STAR,
-        cronSchedule = "*/10 * * * * ?"
+        cronSchedule = "0 0 0 * * ?"
 )
 public class TestJob extends QuartzJobBean {
 
