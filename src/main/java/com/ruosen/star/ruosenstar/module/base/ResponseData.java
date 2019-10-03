@@ -27,6 +27,15 @@ public class ResponseData<T> {
         ResponseData responseData = new ResponseData();
         responseData.setCode(ResultInfoEnum.ERROR_MSG.getCode());
         responseData.setMsg(ResultInfoEnum.ERROR_MSG.getMsg());
+        responseData.setData(null);
+        return responseData;
+    }
+
+    public ResponseData error(Integer code, String msg) {
+        ResponseData responseData = new ResponseData();
+        responseData.setCode(code);
+        responseData.setMsg(msg);
+        responseData.setData(null);
         return responseData;
     }
 
@@ -34,6 +43,7 @@ public class ResponseData<T> {
         ResponseData responseData = new ResponseData();
         responseData.setCode(ResultInfoEnum.ERROR_MSG.getCode());
         responseData.setMsg(msg);
+        responseData.setData(null);
         return responseData;
     }
 
@@ -45,10 +55,19 @@ public class ResponseData<T> {
         return responseData;
     }
 
+    public ResponseData ok(String msg) {
+        ResponseData responseData = new ResponseData();
+        responseData.setCode(ResultInfoEnum.SUCCESS_MSG.getCode());
+        responseData.setMsg(msg);
+        responseData.setData(null);
+        return responseData;
+    }
+
     public ResponseData ok() {
         ResponseData responseData = new ResponseData();
         responseData.setCode(ResultInfoEnum.SUCCESS_MSG.getCode());
         responseData.setMsg(ResultInfoEnum.SUCCESS_MSG.getMsg());
+        responseData.setData(null);
         return responseData;
     }
 

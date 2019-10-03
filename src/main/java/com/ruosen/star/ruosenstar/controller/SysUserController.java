@@ -1,6 +1,6 @@
 package com.ruosen.star.ruosenstar.controller;
 
-import com.baomidou.mybatisplus.plugins.Page;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.ruosen.star.ruosenstar.module.base.PageInfo;
 import com.ruosen.star.ruosenstar.module.base.ResponseData;
 import com.ruosen.star.ruosenstar.module.vo.SysUserRq;
@@ -27,11 +27,12 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/sysUser")
-@Api(value = "系统用户")
+@Api(tags = "系统用户")
 public class SysUserController {
 
     @Autowired
     private SysUserService sysUserService;
+
 
     @PostMapping("/addUser")
     @ApiOperation(value = "新增系统用户")
@@ -80,7 +81,7 @@ public class SysUserController {
     }
 
     @PostMapping("/getUserList")
-    @ApiOperation(value = "获取用户分页")
+    @ApiOperation(value = "获取用集合")
     public ResponseData<List<SysUserVo>> getUserList(@RequestBody(required = false) SysUserRq sysUserRq) {
         List<SysUserVo> sysUserVoPage = sysUserService.selectUserList(sysUserRq);
         return new ResponseData<>().ok(sysUserVoPage);

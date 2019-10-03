@@ -3,15 +3,15 @@
 <mapper namespace="com.ruosen.star.ruosenstar.dao.SysUserMappper">
 
     <sql id="usersql">
-         select id,user_name,nick_name,age,sex,password from sys_user
+         select id,u_name,nick_name,age,sex,password from sys_user
     </sql>
     <!-- 获取用户的分页 -->
     <select id="selectUserPage" resultType="com.ruosen.star.ruosenstar.module.vo.SysUserVo"
             parameterType="com.ruosen.star.ruosenstar.module.vo.SysUserRq">
         <include refid="usersql"></include>
         <where>
-            <if test="userName != null  and userName != ''">
-                and user_name = #{userName}
+            <if test="name != null  and name != ''">
+                and name = #{name}
             </if>
             <if test="age != null">
                 and age = #{age}

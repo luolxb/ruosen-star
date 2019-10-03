@@ -27,7 +27,7 @@ public class SysUserRq implements Serializable {
      */
     @NotNull(message = "用户名称不能为空")
     @ApiModelProperty(value = "用户名称")
-    private String userName;
+    private String name;
 
     /**
      * 昵称
