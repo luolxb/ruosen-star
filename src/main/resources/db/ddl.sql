@@ -3,7 +3,7 @@
 create table sys_user
 (
     id        int(10) auto_increment comment 'ID',
-    user_name varchar(32) not null comment '用户姓名',
+    name      varchar(32) not null comment '用户姓名',
     password  varchar(64) not null comment '用户密码',
     nick_name varchar(64) not null comment '昵称',
     age       int(2)      not null comment '年龄',
