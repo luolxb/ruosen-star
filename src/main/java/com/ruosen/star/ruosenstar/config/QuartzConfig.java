@@ -4,6 +4,7 @@ import com.ruosen.star.ruosenstar.annotation.JobAutoConfig;
 import org.quartz.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.GenericApplicationContext;
 
 import java.util.Map;
@@ -18,7 +19,7 @@ import java.util.Map;
  *  * @version V1.0.0
  *  
  */
-//@Configuration
+@Configuration
 public class QuartzConfig {
 
     @Autowired
@@ -30,6 +31,7 @@ public class QuartzConfig {
         beansWithAnnotation.forEach((k, v) -> {
             Class<?> clz = v.getClass();
             JobAutoConfig annotation = clz.getAnnotation(JobAutoConfig.class);
+
             String jobName = annotation.jobName().isEmpty() ? k : annotation.jobName();
             String jobBeanName = annotation.jobBeanName().isEmpty() ? k : annotation.jobBeanName();
             String triggerName = annotation.triggerName().isEmpty() ? k + "Trigger" : annotation.triggerName();
