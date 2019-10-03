@@ -1,4 +1,4 @@
-package com.ruosen.star.ruosenstar.module.base;
+package com.ruosen.star.ruosenstar.utils;
 
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.core.MessageBuilder;

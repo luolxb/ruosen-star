@@ -1,9 +1,9 @@
 package com.ruosen.star.ruosenstar.service.impl;
 
-import com.ruosen.star.ruosenstar.config.HttpUtil;
-import com.ruosen.star.ruosenstar.config.RequestHandler;
 import com.ruosen.star.ruosenstar.module.po.SysUser;
 import com.ruosen.star.ruosenstar.service.SysUserService;
+import com.ruosen.star.ruosenstar.utils.HttpUtil;
+import com.ruosen.star.ruosenstar.utils.RequestHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

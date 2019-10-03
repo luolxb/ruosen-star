@@ -2,11 +2,11 @@ package com.ruosen.star.ruosenstar.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.ruosen.star.ruosenstar.module.base.PageInfo;
 import com.ruosen.star.ruosenstar.module.base.ResponseData;
 import com.ruosen.star.ruosenstar.module.po.SysUser;
 import com.ruosen.star.ruosenstar.module.vo.SysUserRq;
 import com.ruosen.star.ruosenstar.module.vo.SysUserVo;
+import com.ruosen.star.ruosenstar.utils.PageInfo;
 
 import java.util.List;
 

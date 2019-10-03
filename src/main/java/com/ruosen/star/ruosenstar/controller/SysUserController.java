@@ -1,11 +1,11 @@
 package com.ruosen.star.ruosenstar.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.ruosen.star.ruosenstar.module.base.PageInfo;
 import com.ruosen.star.ruosenstar.module.base.ResponseData;
 import com.ruosen.star.ruosenstar.module.vo.SysUserRq;
 import com.ruosen.star.ruosenstar.module.vo.SysUserVo;
 import com.ruosen.star.ruosenstar.service.SysUserService;
+import com.ruosen.star.ruosenstar.utils.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

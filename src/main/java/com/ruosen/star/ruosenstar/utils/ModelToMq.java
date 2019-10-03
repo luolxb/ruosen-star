@@ -1,4 +1,4 @@
-package com.ruosen.star.ruosenstar.module.base;
+package com.ruosen.star.ruosenstar.utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ruosen.star.ruosenstar.annotation.PushMqJsonElement;

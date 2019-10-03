@@ -1,10 +1,10 @@
 package com.ruosen.star.ruosenstar.mq.producer.impl;
 
 import com.ruosen.star.ruosenstar.config.RabbitConfig;
-import com.ruosen.star.ruosenstar.module.base.MessageUtil;
-import com.ruosen.star.ruosenstar.module.base.ModelToMq;
 import com.ruosen.star.ruosenstar.module.vo.SysUserVo;
 import com.ruosen.star.ruosenstar.mq.producer.TestProducerService;
+import com.ruosen.star.ruosenstar.utils.MessageUtil;
+import com.ruosen.star.ruosenstar.utils.ModelToMq;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.amqp.core.Message;

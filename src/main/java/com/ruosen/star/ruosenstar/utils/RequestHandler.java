@@ -1,4 +1,4 @@
-package com.ruosen.star.ruosenstar.config;
+package com.ruosen.star.ruosenstar.utils;
 
 import com.ruosen.star.ruosenstar.module.po.SysUser;
 import lombok.extern.slf4j.Slf4j;
