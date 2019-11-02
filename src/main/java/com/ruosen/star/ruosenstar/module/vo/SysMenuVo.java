@@ -1,9 +1,9 @@
-package com.ruosen.star.ruosenstar.module.po;
+package com.ruosen.star.ruosenstar.module.vo;
 
-import com.ruosen.star.ruosenstar.module.base.BasePo;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  *  
@@ -16,9 +16,11 @@ import java.io.Serializable;
  *  
  */
 @Data
-public class SysMenu extends BasePo implements Serializable {
+public class SysMenuVo implements Serializable {
 
     private static final long serialVersionUID = 796824085197446726L;
+
+    private Long id;
 
     private String menuCode;
 
@@ -33,4 +35,6 @@ public class SysMenu extends BasePo implements Serializable {
     private long sortNum;
 
     private String icon;
+
+    private List<SysMenuVo> childMenus;
 }

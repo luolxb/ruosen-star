@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ruosen.star.ruosenstar.dao.ProductMapper">
+
+    <select id="getProductPage" parameterType="com.ruosen.star.ruosenstar.module.vo.ProductRq"
+            resultType="com.ruosen.star.ruosenstar.module.vo.ProductVo">
+        select * from product
+        <where>
+            <if test="productRq.productName != null and productRq.productName != ''">
+                and product_name like CONCAT('%',#{productRq.productName},'%')
+            </if>
+            <if test="productRq.describe != null and productRq.describe != ''">
+                and `describe` like CONCAT('%',#{productRq.describe},'%')
+            </if>
+        </where>
+    </select>
+</mapper>

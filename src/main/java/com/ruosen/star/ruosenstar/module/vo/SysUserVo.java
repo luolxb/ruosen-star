@@ -4,8 +4,6 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ruosen.star.ruosenstar.annotation.PushMqJsonElement;
 import com.ruosen.star.ruosenstar.annotation.PushMqJsonSerializable;
-import com.ruosen.star.ruosenstar.module.po.SysMenu;
-import com.ruosen.star.ruosenstar.module.po.SysRole;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -64,8 +62,15 @@ public class SysUserVo implements Serializable {
     private String sex;
 
     @TableField(exist = false)
-    private List<SysRole> roleList;
+    private List<SysRoleVo> roleList;
 
     @TableField(exist = false)
-    private List<SysMenu> menuList;
+    private List<SysMenuVo> menuList;
+
+
+    @ApiModelProperty(value = "电话")
+    private String phone;
+
+    @ApiModelProperty(value = "邮箱")
+    private String email;
 }

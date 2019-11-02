@@ -1,6 +1,13 @@
 package com.ruosen.star.ruosenstar.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.ruosen.star.ruosenstar.exception.CustomException;
+import com.ruosen.star.ruosenstar.module.Enums.ResultInfoEnum;
 import com.ruosen.star.ruosenstar.module.po.SysUser;
+import com.ruosen.star.ruosenstar.module.vo.SysMenuVo;
+import com.ruosen.star.ruosenstar.module.vo.SysRoleVo;
+import com.ruosen.star.ruosenstar.service.SysMenuService;
+import com.ruosen.star.ruosenstar.service.SysRoleService;
 import com.ruosen.star.ruosenstar.service.SysUserService;
 import com.ruosen.star.ruosenstar.utils.HttpUtil;
 import com.ruosen.star.ruosenstar.utils.RequestHandler;
@@ -15,6 +22,7 @@ import org.springframework.util.AntPathMatcher;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -38,29 +46,39 @@ public class UserService implements UserDetailsService {
     private SysUserService sysUserService;
 
     @Autowired
+    private SysMenuService sysMenuService;
+
+    @Autowired
+    private SysRoleService sysRoleService;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     private AntPathMatcher antPathMatcher = new AntPathMatcher();
 
 
     @Override
-    public UserDetails loadUserByUsername(String userNmae) throws UsernameNotFoundException {
-//        SysUser sysUser = sysUserService.selectOne(new EntityWrapper<SysUser>().eq("user_name", userNmae));
-////        if (sysUser != null) {
-////            // 获取角色
-////            // 获取菜单
-////
-////        }
-        Set<String> set = new HashSet<>();
-        set.add("/sysUser/getUserList");
-        SysUser sysUser = new SysUser();
-        sysUser.setName("user1");
-        sysUser.setNickName("若森");
-        sysUser.setAge(18);
-        sysUser.setSex("男");
-        sysUser.setId(12L);
-        sysUser.setPassword(passwordEncoder.encode("123"));
-        sysUser.setPermission(set);
+    public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
+        SysUser sysUser = sysUserService.getOne(new QueryWrapper<SysUser>().eq("name", name));
+        if (sysUser == null) {
+            throw new CustomException(ResultInfoEnum.USER_IS_NOT_EXIST);
+        }
+        // 获取角色
+        List<SysRoleVo> roleVoList = sysRoleService.getSysRoleListByName(name);
+        // 获取菜单
+        List<SysMenuVo> sysMenuList = sysMenuService.getSysMenuList(name);
+
+        // 获取权限
+        List<SysMenuVo> permissions = sysMenuService.getPermission(name);
+
+        Set<String> permissionSet = new HashSet<>();
+        permissions.forEach(permission ->
+                permissionSet.add(permission.getUrl())
+        );
+        sysUser.setRoleList(roleVoList);
+        sysUser.setPassword(passwordEncoder.encode("123456"));
+        sysUser.setPermission(permissionSet);
+        sysUser.setMenuList(sysMenuList);
         return sysUser;
 
     }

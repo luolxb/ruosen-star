@@ -53,4 +53,11 @@ public class SysUserRq implements Serializable {
     @NotNull(message = "用户性别不能为空")
     @ApiModelProperty(value = "用户性别")
     private String sex;
+
+
+    @ApiModelProperty(value = "电话")
+    private String phone;
+
+    @ApiModelProperty(value = "邮箱")
+    private String email;
 }

@@ -3,7 +3,7 @@
 <mapper namespace="com.ruosen.star.ruosenstar.dao.SysUserMappper">
 
     <sql id="usersql">
-         select id,u_name,nick_name,age,sex,password from sys_user
+         select id,name,nick_name,age,sex,password from sys_user
     </sql>
     <!-- 获取用户的分页 -->
     <select id="selectUserPage" resultType="com.ruosen.star.ruosenstar.module.vo.SysUserVo"

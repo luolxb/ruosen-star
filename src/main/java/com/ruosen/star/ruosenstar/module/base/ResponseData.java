@@ -63,6 +63,14 @@ public class ResponseData<T> {
         return responseData;
     }
 
+    public ResponseData ok(String msg, T data) {
+        ResponseData responseData = new ResponseData();
+        responseData.setCode(ResultInfoEnum.SUCCESS_MSG.getCode());
+        responseData.setMsg(msg);
+        responseData.setData(data);
+        return responseData;
+    }
+
     public ResponseData ok() {
         ResponseData responseData = new ResponseData();
         responseData.setCode(ResultInfoEnum.SUCCESS_MSG.getCode());

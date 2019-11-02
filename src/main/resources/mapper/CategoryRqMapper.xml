@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ruosen.star.ruosenstar.dao.CategoryMapper">
+
+    <select id="getCategoryPage" resultType="com.ruosen.star.ruosenstar.module.vo.CategoryVo"
+            parameterType="com.ruosen.star.ruosenstar.module.vo.CategoryRq">
+        select * from category
+        <where>
+            <if test="conditions.parentCode == null or conditions.parentCode== ''">
+                parent_code is null
+            </if>
+            <if test="conditions.parentCode != null and conditions.parentCode != ''">
+                parent_code = #{conditions.parentCode}
+            </if>
+        </where>
+    </select>
+
+    <select id="getDetailByProductId" resultType="com.ruosen.star.ruosenstar.module.vo.CategoryVo">
+        select *
+        from category c,
+             category_product cp
+        where c.id = cp.category_id
+          and cp.product_id = #{id}
+    </select>
+</mapper>

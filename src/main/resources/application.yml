@@ -61,13 +61,14 @@ spring:
 # mybatis-plus 配置
 mybatis-plus:
     mapper-locations: classpath*:/mapper/*.xml   #把xml文件放在com.XX.mapper.*中可能会出现找到的问题，这里把他放在resource下的mapper中
-    type-aliases-package: com.ruosen.star.ruosenstar.module.po  #实体扫描，多个package用逗号或者分号分隔
     global-config:
-        db-column-underline: true
-        id-type: 0
+        db-config:
+            id-type: auto
     configuration:
         map-underscore-to-camel-case: true
         cache-enabled: false
+    type-aliases-package: com.ruosen.star.ruosenstar.module.po
+
 
 app:
     mq:

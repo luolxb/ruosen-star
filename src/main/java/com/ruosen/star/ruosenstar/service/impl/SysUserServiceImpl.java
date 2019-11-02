@@ -11,6 +11,8 @@ import com.ruosen.star.ruosenstar.module.vo.SysUserRq;
 import com.ruosen.star.ruosenstar.module.vo.SysUserVo;
 import com.ruosen.star.ruosenstar.service.SysUserService;
 import com.ruosen.star.ruosenstar.utils.PageInfo;
+import com.ruosen.star.ruosenstar.utils.RequestHandler;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
@@ -32,6 +34,7 @@ import java.util.List;
  *  
  */
 @Service
+@Slf4j
 public class SysUserServiceImpl extends ServiceImpl<SysUserMappper, SysUser> implements SysUserService {
 
     /**
@@ -40,25 +43,35 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMappper, SysUser> imp
      * @param sysUserRq
      */
     @Override
-    @CachePut(value = "user", key = "#result.id", unless = "#result == 0")
+    @CachePut(value = "user", key = "#result", unless = "#result <= 0")
     @Transactional(rollbackFor = Exception.class)
-    public void addUser(SysUserRq sysUserRq) {
+    public SysUserVo addUser(SysUserRq sysUserRq) {
         SysUser sysUser = new SysUser();
         BeanUtils.copyProperties(sysUserRq, sysUser);
         sysUser.setCreateDate(new Date());
-        sysUser.setCreateBy("todo");
-        this.baseMapper.insert(sysUser);
+        sysUser.setCreateBy(RequestHandler.getDefaultUserName());
+        int insert = this.baseMapper.insert(sysUser);
+        SysUserVo sysUserVo = new SysUserVo();
+        if (insert > 0) {
+            BeanUtils.copyProperties(sysUser, sysUserVo);
+        }
+        return sysUserVo;
     }
 
     @Override
-    @CachePut(value = "user", key = "#sysUserRq")
+    @CachePut(value = "user", key = "#result", unless = "#result <= 0")
     @Transactional(rollbackFor = Exception.class)
-    public void updateUser(SysUserRq sysUserRq) {
+    public SysUserVo updateUser(SysUserRq sysUserRq) {
         SysUser sysUser = new SysUser();
         BeanUtils.copyProperties(sysUserRq, sysUser);
         sysUser.setUpdateDate(new Date());
-        sysUser.setUpdateBy("todo");
-        this.baseMapper.updateById(sysUser);
+        sysUser.setUpdateBy(RequestHandler.getDefaultUserName());
+        int i = this.baseMapper.updateById(sysUser);
+        SysUserVo sysUserVo = new SysUserVo();
+        if (i > 0) {
+            BeanUtils.copyProperties(sysUser, sysUserVo);
+        }
+        return sysUserVo;
     }
 
     /**

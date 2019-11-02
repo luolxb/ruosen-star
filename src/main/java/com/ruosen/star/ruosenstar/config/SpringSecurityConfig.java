@@ -63,7 +63,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/csrf", "/swagger-resources/**", "/v2/api-docs",
+        web.ignoring().antMatchers("/upload/**", "/product/**", "/category/**", "/sysUser/**", "/generate", "/getWeather", "/csrf", "/swagger-resources/**", "/v2/api-docs",
                 "/druid/**", "/swagger-ui.html", "/webjars/**", "/css/**", "/js/**", "/img/**", "/vendor/**");
     }
 
@@ -77,6 +77,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
+                .mvcMatchers("/login").permitAll()
                 .anyRequest()
                 .access("@userService.hasPermission(request)")
                 .and()
@@ -86,6 +87,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginProcessingUrl("/login")
                 .usernameParameter("name")
                 .passwordParameter("password")
+                .permitAll()
                 .failureHandler((request, response, e) -> {
                     response.setContentType("application/json;charset=utf-8");
                     ResponseData responseData = null;
@@ -111,7 +113,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                             responseData = new ResponseData().error(msg);
                         }
                     } else {
-                        responseData = new ResponseData().error("登录失败");
+                        responseData = new ResponseData().error("登录失败,请确认账号信息");
                     }
                     response.setStatus(HttpServletResponse.SC_OK);
                     PrintWriter out = response.getWriter();
@@ -144,6 +146,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                     out.flush();
                     out.close();
                 }).accessDeniedHandler(authenticationAccessDeniedHandler)
+                .and()
+                .logout().permitAll().invalidateHttpSession(true).deleteCookies("JSESSIONID")
                 .and()
                 .sessionManagement().maximumSessions(2)
                 .maxSessionsPreventsLogin(false)

@@ -27,14 +27,14 @@ public interface SysUserService extends IService<SysUser> {
      *
      * @param sysUserRq
      */
-    void addUser(SysUserRq sysUserRq);
+    SysUserVo addUser(SysUserRq sysUserRq);
 
     /**
      * 修改系统用户
      *
      * @param sysUserRq
      */
-    void updateUser(SysUserRq sysUserRq);
+    SysUserVo updateUser(SysUserRq sysUserRq);
 
     /**
      * 删除用户

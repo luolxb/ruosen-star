@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 public class RequestHandler {
 
     public static final ThreadLocal<HttpServletRequest> REQUEST_THREAD = new ThreadLocal<>();
-    public static final String DEFAULT_USER = "RUOSEN";
+    public static final String DEFAULT_USER = "ruosen";
 
     /**
      * 获取当前用户

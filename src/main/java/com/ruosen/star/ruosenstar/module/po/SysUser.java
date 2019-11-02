@@ -3,6 +3,8 @@ package com.ruosen.star.ruosenstar.module.po;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ruosen.star.ruosenstar.module.base.BasePo;
+import com.ruosen.star.ruosenstar.module.vo.SysMenuVo;
+import com.ruosen.star.ruosenstar.module.vo.SysRoleVo;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -54,6 +56,12 @@ public class SysUser extends BasePo implements UserDetails {
     @ApiModelProperty(value = "用户密码")
     private String password;
 
+    @ApiModelProperty(value = "电话")
+    private String phone;
+
+    @ApiModelProperty(value = "邮箱")
+    private String email;
+
     /**
      * 年龄
      */
@@ -64,10 +72,10 @@ public class SysUser extends BasePo implements UserDetails {
     private String sex;
 
     @TableField(exist = false)
-    private List<SysRole> roleList;
+    private List<SysRoleVo> roleList;
 
     @TableField(exist = false)
-    private List<SysMenu> menuList;
+    private List<SysMenuVo> menuList;
 
 
     @JsonIgnore
