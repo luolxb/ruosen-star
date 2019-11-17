@@ -20,7 +20,7 @@ public enum ResultInfoEnum {
     ERROR_MSG(-1, "未知错误,请联系管理员！"),
     SUCCESS_MSG(0, "成功！"),
     USER_IS_NOT_EXIST(1, "用户不存在"),
-    OBJECT_IS_NOT_EXIST(2, "对象不存在");
+    CODE_IS_NULL(2, "验证码为空");
 
     @Setter
     @Getter

@@ -1,7 +1,12 @@
 server:
-    port: 9000 # 配置服务端口号
+    port: 80 # 配置服务端口号
 #  servlet:
 #      context-path: /ruosen  # 配置服务上下文
 logging:
     pattern:
         level: info
+spring:
+    mvc:
+        view:
+            prefix: /templates/
+            suffix: html

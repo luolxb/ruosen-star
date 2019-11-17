@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>微信登录</title>
+</head>
+<script src="https://res.wx.qq.com/connect/zh_CN/htmledition/js/jquery.min.js"></script>
+<script src="https://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js"></script>
+<body>
+<div id="weixin" style="width: 500px;height: 500px;"></div>
+
+
+</body>
+
+<script>
+    $(function () {
+        var obj = new WxLogin({
+            id: "weixin",
+            appid: "wx7287a60bb700fd21",
+            scope: "snsapi_login",
+            redirect_uri: "http://www.txjava.cn/loginServlet"
+        });
+    })
+</script>
+
+</html>
