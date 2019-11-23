@@ -7,7 +7,6 @@ import com.qq.connect.javabeans.qzone.UserInfoBean;
 import com.qq.connect.oauth.Oauth;
 import com.ruosen.star.ruosenstar.exception.CustomException;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -61,7 +60,7 @@ public class QQController {
     public Map<Object, Object> qqConnect(HttpServletRequest request, HttpServletResponse response) throws Exception {
         AccessToken accessTokenObj = (new Oauth()).getAccessTokenByRequest(request);
         // 用户授权的时候取消了
-        if (StringUtils.isBlank(accessTokenObj.getAccessToken())) {
+        if (accessTokenObj == null) {
             log.error("没有获取到响应参数......");
             throw new CustomException(999, "没有获取到响应参数......");
         }
