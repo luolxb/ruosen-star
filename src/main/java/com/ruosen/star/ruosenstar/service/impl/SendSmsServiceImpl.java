@@ -9,6 +9,7 @@ import com.aliyuncs.profile.DefaultProfile;
 import com.aliyuncs.profile.IClientProfile;
 import com.ruosen.star.ruosenstar.exception.CustomException;
 import com.ruosen.star.ruosenstar.module.Enums.ResultInfoEnum;
+import com.ruosen.star.ruosenstar.module.vo.SmsValidRq;
 import com.ruosen.star.ruosenstar.service.SendSmsService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -143,9 +144,22 @@ public class SendSmsServiceImpl implements SendSmsService {
             log.error("由于系统维护 无法使用", e);
             throw new CustomException(ResultInfoEnum.ERROR_MSG);
         }
-
         return code;
     }
+
+    @Override
+    public void valid(SmsValidRq smsValidRq) {
+        String code = (String) getSession().getAttribute(smsValidRq.getMobile());
+        // 验证码已经过期
+        if (StringUtils.isBlank(code)) {
+            throw new CustomException(ResultInfoEnum.CODE_IS_OVERDUE);
+        }
+        // 如果输入验证不等于缓存中验证
+        if (!StringUtils.equals(code, smsValidRq.getValidCode())) {
+            throw new CustomException(ResultInfoEnum.CODE_IS_ERROR);
+        }
+    }
+
 
     //获取会话缓存内容
     private HttpSession getSession() {
@@ -153,4 +167,6 @@ public class SendSmsServiceImpl implements SendSmsService {
                 .getRequest();
         return request.getSession();
     }
+
+
 }

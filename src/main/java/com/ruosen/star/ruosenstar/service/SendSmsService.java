@@ -1,5 +1,7 @@
 package com.ruosen.star.ruosenstar.service;
 
+import com.ruosen.star.ruosenstar.module.vo.SmsValidRq;
+
 /**
  *  
  *  * @projectName ruosen-star
@@ -13,4 +15,6 @@ package com.ruosen.star.ruosenstar.service;
 public interface SendSmsService {
 
     String sendPhoneCode(String mobile);
+
+    void valid(SmsValidRq smsValidRq);
 }

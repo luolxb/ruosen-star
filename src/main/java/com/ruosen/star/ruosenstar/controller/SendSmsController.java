@@ -1,16 +1,13 @@
 package com.ruosen.star.ruosenstar.controller;
 
 import com.ruosen.star.ruosenstar.module.base.ResponseData;
+import com.ruosen.star.ruosenstar.module.vo.SmsValidRq;
 import com.ruosen.star.ruosenstar.service.SendSmsService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -30,6 +27,13 @@ public class SendSmsController {
     @Autowired
     private SendSmsService sendSmsService;
 
+    /**
+     * 发送验证码
+     *
+     * @param mobile
+     * @param session
+     * @return
+     */
     @GetMapping("/sendSms")
     public ResponseData sendSms(@RequestParam String mobile, HttpSession session) {
 
@@ -45,10 +49,22 @@ public class SendSmsController {
         return new ResponseData<>().ok("success");
     }
 
-    private HttpSession getSession() {
-        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
-                .getRequest();
-        return request.getSession();
+
+    /**
+     * 验证验证码
+     *
+     * @param smsValidRq
+     * @param bindingResult
+     * @return
+     */
+    @PostMapping("/valid")
+    public ResponseData valid(@RequestBody SmsValidRq smsValidRq,
+                              BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return new ResponseData().error(bindingResult.getFieldError().getDefaultMessage());
+        }
+        sendSmsService.valid(smsValidRq);
+        return new ResponseData().ok();
     }
 
 
