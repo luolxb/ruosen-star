@@ -63,7 +63,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/favicon.ico", "/connect/**", "/qq**", "/loginServlet/**", "/wclogin/**", "/sendSms/**",
+        web.ignoring().antMatchers("/error","/pay**","/payment/websocket/**","/wechat/**","/page/**","/favicon.ico", "/connect/**", "/qq**", "/loginServlet/**", "/wclogin/**", "/sendSms/**",
                 "/upload/**", "/product/**", "/category/**", "/sysUser/**", "/generate", "/getWeather", "/csrf", "/swagger-resources/**",
                 "/v2/api-docs", "/druid/**", "/swagger-ui.html", "/webjars/**", "/css/**", "/js/**", "/img/**", "/vendor/**");
     }

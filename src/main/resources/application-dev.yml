@@ -5,8 +5,3 @@ server:
 logging:
     pattern:
         level: info
-spring:
-    mvc:
-        view:
-            prefix: /templates/
-            suffix: html

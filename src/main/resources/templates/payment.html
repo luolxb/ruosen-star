@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>支付页面</title>
+<script type="text/javascript">
+    var websocket=null;//websocket 的变量
+    function load() {//初始化 websocket
+        //获取订单号
+        var id = document.getElementById("oid").innerHTML;
+        //建立连接
+        if('WebSocket' in window){//支持 websocket
+            websocket=new WebSocket("ws://"+document.location.host+"/payment/websocket/"+id);
+
+            websocket.onopen=function () {
+                fillData("建立连接了")
+            }
+            websocket.onclose=function () {
+                fillData("连接关闭了")
+            }
+            websocket.onerror=function () {
+                fillData("出现错误了")
+            }
+            websocket.onmessage=function (event) {
+                fillData(event.data);
+            }
+        }else{
+            alert("浏览器不支持 websocket")
+        }
+        //设置监听,当有消息来的时候的监听
+
+    }
+
+    function fillData(data) {
+        document.getElementById("message").innerHTML=data;
+    }
+</script>
+</head>
+<body onload="load()">
+当前是支付页面,正在支付的订单号是:<span id="oid" th:text="${orderId}"></span><br>
+请扫描支付
+<br>
+<img src="/wechat/getImg">
+<br>
+<span id="message"></span>
+</body>
+</html>

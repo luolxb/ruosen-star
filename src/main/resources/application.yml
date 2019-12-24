@@ -21,9 +21,9 @@ spring:
     rabbitmq:
         host: 127.0.0.1
         port: 5672
-        username: ruosen-star
-        password: 123456
-        virtual-host: /ruosen-star
+        username: ruosen
+        password: ruosen
+        virtual-host: /ruosen
         publisher-confirms: true
     # quartz 配置
     quartz:
@@ -50,15 +50,21 @@ spring:
                     starttls:
                         enable: true
                         required: true
-    freemarker:
-        content-type: text/html
-        #后缀名
-        suffix: .html
-        template-loader-path: classpath:/templates
-        charset: UTF-8
-        check-template-location: true
+#    freemarker:
+#        content-type: text/html
+#        #后缀名
+#        suffix: .html
+#        template-loader-path: classpath:/templates
+#        charset: UTF-8
+#        check-template-location: true
 
-# mybatis-plus 配置
+    thymeleaf:
+        cache: false # mybatis-plus 配置
+        check-template: true
+        encoding: UTF-8
+        enabled: true
+        prefix: classpath:/templates/
+        suffix: .html
 mybatis-plus:
     mapper-locations: classpath*:/mapper/*.xml   #把xml文件放在com.XX.mapper.*中可能会出现找到的问题，这里把他放在resource下的mapper中
     global-config:
@@ -87,3 +93,13 @@ app:
 lance:
     mail:
         sender: 18687269789@163.com
+
+# 微信支付相关配置
+wechat:
+    appId: wx632c8f211f8122c6   # 微信公众号的 id
+    mchId: 1497984412   # 商户 id
+    apiKey: sbNCm1JnevqI36LrEaxFwcaT0hkGxFnC  # 密钥
+    ufdooerUrl: https://api.mch.weixin.qq.com/pay/unifiedorder  # 微信的统一下单地址
+    notifyUrl: http://pic.chenjunbo.xin/payment/result # 回调 URL
+    createIp: 180.130.10.113  # 发起 IP
+
