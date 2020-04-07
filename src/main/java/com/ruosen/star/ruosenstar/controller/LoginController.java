@@ -45,26 +45,34 @@ public class LoginController {
     @ResponseBody
     public ResponseData getWeather() {
 
-        String addrUri = "http://api.map.baidu.com/location/ip?ak=F454f8a5efe5e577997931cc01de3974&ip=";
+        // TODO
+        String ak = "F454f8a5efe5e577997931cc01de3974";
+        // TODO
+        String ip = "169.254.245.232";
+
+
+        String addrUri = "http://api.map.baidu.com/location/ip?ak=" + ak + "&ip=" + ip;
 
         RestTemplate restTemplate = new RestTemplate();
 
         HttpHeaders headers = new HttpHeaders();
-        HttpEntity<String> entity = new HttpEntity<String>(headers);
+        HttpEntity<String> entity = new HttpEntity<>(headers);
         String strbody = restTemplate.exchange(addrUri, HttpMethod.GET, entity, String.class).getBody();
 
-        JSONObject parse = JSONObject.parseObject(strbody);
-        String content = parse.getString("content");
-        JSONObject jsonObject = JSONObject.parseObject(content);
-        String addressDetail = jsonObject.getString("address_detail");
-        JSONObject jsonObject1 = JSONObject.parseObject(addressDetail);
-        String city = jsonObject1.getString("city");
+        log.info("根据IP获取地址信息->{}", strbody);
+
+//        JSONObject parse = JSONObject.parseObject(strbody);
+//        String content = parse.getString("content");
+//        JSONObject jsonObject = JSONObject.parseObject(content);
+//        String addressDetail = jsonObject.getString("address_detail");
+//        JSONObject jsonObject1 = JSONObject.parseObject(addressDetail);
+//        String city = jsonObject1.getString("city");
+        String city = "深圳";
 
         String weatherUrl = "http://api.map.baidu.com/telematics/v3/weather?location=" + city + "&output=json&ak=3p49MVra6urFRGOT9s8UBWr2";
         String body = restTemplate.exchange(weatherUrl, HttpMethod.GET, entity, String.class).getBody();
 
         JSONObject obj = JSONObject.parseObject(body);
-
         Map map = JSONObject.toJavaObject(obj, Map.class);
         return new ResponseData().ok(map);
     }

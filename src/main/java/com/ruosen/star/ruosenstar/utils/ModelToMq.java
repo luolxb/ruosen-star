@@ -55,7 +55,7 @@ public class ModelToMq {
      * @param date
      * @return
      */
-    private String dateformat(String pattern, Date date) {
+    private String dateFormat(String pattern, Date date) {
         SimpleDateFormat dateFormat = new SimpleDateFormat(pattern);
         String format = dateFormat.format(date);
         return format;
@@ -90,7 +90,7 @@ public class ModelToMq {
         if (Date.class.isAssignableFrom(field.getType())) {
             Date date = (Date) field.get(object);
             if (null != date) {
-                return dateformat(pattern, date);
+                return dateFormat(pattern, date);
             }
         }
         return field.get(object);

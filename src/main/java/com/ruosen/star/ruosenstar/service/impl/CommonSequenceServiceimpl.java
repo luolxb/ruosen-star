@@ -34,8 +34,6 @@ public class CommonSequenceServiceimpl extends ServiceImpl<CommonSequenceMapper,
      */
     @Override
     public String generate(String prefix, String pattern, int count) {
-
-
         String generate = prefix + DateFormatUtils.format(new Date(), pattern) + this.baseMapper.querySequence(count);
         this.baseMapper.insert(new CommonSequence(generate));
         return generate;
