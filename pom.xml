@@ -16,7 +16,7 @@
 
     <properties>
         <java.version>1.8</java.version>
-        <wagger.version>2.9.2</wagger.version>
+        <wagger.version>2.10.0</wagger.version>
     </properties>
 
     <dependencies>
